@@ -3,9 +3,6 @@ from discord.ext import commands
 from aiohttp import request
 bot = commands.Bot(command_prefix='toon ')
 
-@bot.command()
-async def help(ctx):
-    await ctx.send('Currently the only command is toon ttrdistricts but more will come soon')
 
 @bot.command()
 async def ttrdistricts(ctx):
