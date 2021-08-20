@@ -1,11 +1,6 @@
 #***************************************************************************#
 #                                                                           #
 # Toonbot - A Toontown Themed Discord Bot.                                  #
-# https://github.com/NoraHanegan/Toonbot                                    #
-# Copyright (C) 2021 Nora Hanegan. All rights reserved.                     #
-#                                                                           #
-# License:                                                                  #
-# MIT License https://www.mit.edu/~amini/LICENSE.md                         #
 #                                                                           #
 #***************************************************************************#
 import aiohttp
@@ -28,12 +23,14 @@ from keep_alive import keep_alive
 intents = discord.Intents.default()
 intents.members = True
 
-client = commands.Bot(description="Toonbot", command_prefix="toon ", intents=intents, activity=discord.Game(name='Corporate Crash'))
+client = commands.Bot(description="Toonbot", command_prefix="toon ", intents=intents, activity=discord.Game(name=random.choice(playing)))  
 client.remove_command('help')
 
+playing = ["Corporate Crash", "tewtow onlin", "old toontown download free working 100%", "litigator head model"]
 
 #Owner ID
 ownerID = 543576276108181506
+owner2ID = 353615061169995779
 
 @client.event
 async def on_ready():
@@ -66,15 +63,15 @@ async def help(ctx):
     embed.add_field(
         name="General",
         value=
-        "!help - Shows This Message\n\n!ping - Says Pong Back To You\n\n!server - Shows Server Info\n\n!stats - Show Bot Stats",
-        inline=False)
+        "{} help - Shows This Message\n\n!ping - Says Pong Back To You\n\n!server - Shows Server Info\n\n!stats - Show Bot Stats".format(command_prefix,
+        inline=False))
 
     #Fun Comamnds
     embed.add_field(
         name="Fun",
         value=
-        "!toss - Coin Flip\n\n!joke - Give a Dad Joke\n\n!dice - Roll 1-6\n\n!reverse - Reverses the given text\n\n!meme - Gives a random meme\n\n!r/toontown - shows a random post from the Toontown subreddit.\n\n!r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.\n\n\!poll <name> - starts a poll",
-        inline=False)
+        "{} toss - Coin Flip\n\n{}joke - Give a Dad Joke\n\n{}dice - Roll 1-6\n\n{}reverse - Reverses the given text\n\n{}meme - Gives a random meme\n\n{}r/toontown - shows a random post from the Toontown subreddit.\n\n{}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.\n\n\{} poll <name> - starts a poll".format(command_prefix, command_prefix, command_prefix, command_prefix, command_prefix, command_prefix, command_prefix, 
+        inline=False))
     await ctx.send(author, embed=embed)
 
 
@@ -210,7 +207,7 @@ async def stats(ctx):
         name='Discord.py Version', value=f"{dpyVersion}", inline=False)
     embed.add_field(name='Total Guilds:', value=f"{serverCount}", inline=False)
     embed.add_field(name='Total Users:', value=f"{memberCount}", inline=False)
-    embed.add_field(name='Bot Developer:', value="<@" + f"{ownerID}" + ">", inline=False)
+    embed.add_field(name='Bot Developer:', value="<@" + f"{ownerID}" + ">" "<@" + f"{owner2ID}" + ">", inline=False)
     embed.set_footer(text=f"Yours truly, {client.user.name}")
     embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
 
