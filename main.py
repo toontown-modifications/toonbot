@@ -80,6 +80,10 @@ async def help(ctx):
     await ctx.send(author, embed=embed)
 
 
+@client.command(aliases=["fard"])
+async def fart(ctx):
+    "fart"
+
 #Ping Command
 @client.command()
 async def ping(ctx):
