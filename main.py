@@ -18,15 +18,17 @@ from dadjokes import Dadjoke
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
 from datetime import datetime
-from keep_alive import keep_alive
+from discord.ext.commands import CommandNotFound
+
+prefix="toon "
 
 intents = discord.Intents.default()
 intents.members = True
+playing = ["Corporate Crash", "tewtow onlin", "old toontown download free working 100%", "litigator head model"]
 
-client = commands.Bot(description="Toonbot", command_prefix="toon ", intents=intents, activity=discord.Game(name=random.choice(playing)))  
+client = commands.Bot(description="Toonbot", command_prefix=prefix, intents=intents, activity=discord.Game(name=random.choice(playing)))  
 client.remove_command('help')
 
-playing = ["Corporate Crash", "tewtow onlin", "old toontown download free working 100%", "litigator head model"]
 
 #Owner ID
 ownerID = 543576276108181506
@@ -52,6 +54,9 @@ async def on_ready():
   print("Python " + platform.python_version())
   print("Discord.py " + discord.__version__)
 
+prefix = "toon "
+
+
 #Help Command
 @client.command()
 async def help(ctx):
@@ -63,7 +68,7 @@ async def help(ctx):
     embed.add_field(
         name="General",
         value=
-        "{} help - Shows This Message\n\n!ping - Says Pong Back To You\n\n!server - Shows Server Info\n\n!stats - Show Bot Stats".format(command_prefix,
+        "{} help - Shows This Message\n\n!ping - Says Pong Back To You\n\n!server - Shows Server Info\n\n!stats - Show Bot Stats".format(prefix,
         inline=False))
 
     #Fun Comamnds
@@ -207,7 +212,7 @@ async def stats(ctx):
         name='Discord.py Version', value=f"{dpyVersion}", inline=False)
     embed.add_field(name='Total Guilds:', value=f"{serverCount}", inline=False)
     embed.add_field(name='Total Users:', value=f"{memberCount}", inline=False)
-    embed.add_field(name='Bot Developer:', value="<@" + f"{ownerID}" + ">" "<@" + f"{owner2ID}" + ">", inline=False)
+    embed.add_field(name='Bot Developers:', value="<@" + f"{ownerID}" + ">, " "<@" + f"{owner2ID}" + ">", inline=False)
     embed.set_footer(text=f"Yours truly, {client.user.name}")
     embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
 
@@ -243,10 +248,15 @@ async def ttrdistricts(ctx):
     ttr_districts = ttr_districts.replace('"', '')
     ttr_districts = ttr_districts.replace(',', '')
     ttr_districts = str(ttr_districts)[1:-2]
+    
     await ctx.send(ttr_districts)
+
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        await ctx.send("That Command Was not found!")
+
 
 
 #Run Bot
-keep_alive()
-TOKEN = os.environ.get("TOKEN")
-client.run(TOKEN)
+client.run('ODU4ODU3ODc2MDI1NTA3ODUw.YNkPug.JjuI0xeon5nNno7B0fg6TJHFi14')

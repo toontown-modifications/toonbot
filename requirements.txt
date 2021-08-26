@@ -3,5 +3,4 @@ aiohttp
 python-box
 datetime
 dadjokes
-keepalive
 discord-py-slash-command
