@@ -83,6 +83,7 @@ async def help(ctx):
 @client.command(aliases=["fard"])
 async def fart(ctx):
     "fart"
+    await ctx.send('what')
 
 #Ping Command
 @client.command()
