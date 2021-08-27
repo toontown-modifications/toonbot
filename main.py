@@ -75,7 +75,11 @@ async def help(ctx):
     embed.add_field(
         name="Fun",
         value=
-        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - Reverses the given text\n\n {}meme - Gives a random meme\n\n {}r/toontown - shows a random post from the Toontown subreddit.\n\n {}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.\n\n {}poll <name> - starts a poll".format(prefix, prefix, prefix, prefix, prefix, prefix, prefix, prefix),
+        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - Reverses the given text\n\n {}poll <name> - starts a poll".format(prefix, prefix, prefix, prefix, prefix),
+        inline=False)
+    embed.add_field(
+        name="Reddit Commands",
+        value="{}meme - Gives a random meme from r/memes.\n\n {}r/toontown - shows a random post from the Toontown subreddit.\n\n {}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.".format(prefix, prefix, prefix),
         inline=False)
 
     await ctx.send(author, embed=embed)
