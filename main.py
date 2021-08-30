@@ -265,4 +265,5 @@ async def on_command_error(ctx, error):
 
 
 #Run Bot
-client.run('ODU4ODU3ODc2MDI1NTA3ODUw.YNkPug.JjuI0xeon5nNno7B0fg6TJHFi14')
+TOKEN = os.environ.get("TOKEN")
+client.run(TOKEN)
