@@ -4,4 +4,3 @@ python-box
 datetime
 dadjokes
 Flask
-discord-py-slash-command
