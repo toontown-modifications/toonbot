@@ -1,4 +1,4 @@
-discord.py
+py-cord
 aiohttp
 python-box
 datetime
