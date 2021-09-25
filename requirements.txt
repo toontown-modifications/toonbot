@@ -1,4 +1,4 @@
-py-cord
+guilded.py
 aiohttp
 python-box
 datetime

@@ -1,30 +1,26 @@
 #***************************************************************************#
 #                                                                           #
-# Toonbot - A Toontown Themed Discord Bot.                                  #
+# Toonbot - A Toontown Themed guilded Bot.                                  #
 #                                                                           #
 #***************************************************************************#
 import aiohttp
 import box
 import datetime
-import discord
+import guilded
 import json
 import random
 import os
 import platform
 import requests
 import time
-
+from guilded.ext import commands
 from dadjokes import Dadjoke
-from discord.ext import commands
 from datetime import datetime
 from keep_alive import keep_alive
 
-from discord.ext.commands import CommandNotFound
 
 prefix = "toon "
 
-intents = discord.Intents.default()
-intents.members = True
 playing = [
     "Corporate Crash", "tewtow onlin",
     "old toontown download free working 100%", "litigator head model",
@@ -32,9 +28,7 @@ playing = [
 ]
 
 client = commands.Bot(description="Toonbot",
-                      command_prefix=prefix,
-                      intents=intents,
-                      activity=discord.Game(name=random.choice(playing)))
+                      command_prefix=prefix)
 client.remove_command('help')
 
 #Owner ID
@@ -60,7 +54,7 @@ async def on_ready():
     print(f'With Client ID: {client.user.id}')
     print("\nBuilt With:")
     print("Python " + platform.python_version())
-    print("Discord.py " + discord.__version__)
+    print("Guilded.py " + guilded.__version__)
 
 
 prefix = "toon "
@@ -70,7 +64,7 @@ prefix = "toon "
 @client.command()
 async def help(ctx):
     author = ctx.message.author
-    embed = discord.Embed(color=discord.Color.orange())
+    embed = guilded.Embed(color=guilded.Color.orange())
     embed.set_author(name="Commands:")
 
     #General Comamnds
@@ -142,7 +136,7 @@ async def meme(ctx):
     title = data.title
     url_base = data.permalink
     url = "https://reddit.com" + url_base
-    embed = discord.Embed(title=title, url=url, color=discord.Color.blurple())
+    embed = guilded.Embed(title=title, url=url, color=guilded.Color.blurple())
     embed.set_image(url=img)
     await ctx.send(embed=embed)
 
@@ -160,7 +154,7 @@ async def rtoontown(ctx):
     title = data.title
     url_base = data.permalink
     url = "https://reddit.com" + url_base
-    embed = discord.Embed(title=title, url=url, color=discord.Color.blurple())
+    embed = guilded.Embed(title=title, url=url, color=guilded.Color.blurple())
     embed.set_image(url=img)
     await ctx.send(embed=embed)
 
@@ -179,7 +173,7 @@ async def rtoontownrewritten(ctx):
     title = data.title
     url_base = data.permalink
     url = "https://reddit.com" + url_base
-    embed = discord.Embed(title=title, url=url, color=discord.Color.blurple())
+    embed = guilded.Embed(title=title, url=url, color=guilded.Color.blurple())
     embed.set_image(url=img)
     await ctx.send(embed=embed)
 
@@ -196,7 +190,7 @@ async def joke(ctx):
 async def s_info(ctx):
     server = ctx.guild
     icon = ("\uFEFF")
-    embed = discord.Embed(title=f"Server info for {server.name}",
+    embed = guilded.Embed(title=f"Server info for {server.name}",
                           description='\uFEFF',
                           colour=0x98FB98,
                           timestamp=ctx.message.created_at)
@@ -224,11 +218,11 @@ async def s_info(ctx):
 async def stats(ctx):
 
     pythonVersion = platform.python_version()
-    dpyVersion = discord.__version__
+    dpyVersion = guilded.__version__
     serverCount = len(client.guilds)
     memberCount = len(set(client.get_all_members()))
 
-    embed = discord.Embed(title=f'{client.user.name} Stats',
+    embed = guilded.Embed(title=f'{client.user.name} Stats',
                           description='\uFEFF',
                           colour=0x98FB98,
                           timestamp=ctx.message.created_at)
@@ -236,7 +230,7 @@ async def stats(ctx):
     embed.add_field(name='Python Version:',
                     value=f"{pythonVersion}",
                     inline=False)
-    embed.add_field(name='Discord.py Version',
+    embed.add_field(name='guilded.py Version',
                     value=f"{dpyVersion}",
                     inline=False)
     embed.add_field(name='Total Guilds:', value=f"{serverCount}", inline=False)
@@ -255,7 +249,7 @@ async def stats(ctx):
 @client.command(pass_context=True)
 async def poll(ctx, *args):
     mesg = ' '.join(args)
-    embed = discord.Embed(title='A Poll has Started !',
+    embed = guilded.Embed(title='A Poll has Started !',
                           description='{0}'.format(mesg),
                           color=0x00FF00)
 
@@ -292,5 +286,6 @@ async def on_command_error(ctx, error):
 
 #Run Bot
 keep_alive()
-TOKEN = os.environ.get("TOKEN")
-client.run(TOKEN)
+EMAIL = os.environ.get("EMAIL")
+PASSWORD = os.environ.get("PASSWORD")
+client.run(EMAIL, PASSWORD)
