@@ -21,16 +21,16 @@ from keep_alive import keep_alive
 
 from discord.ext.commands import CommandNotFound
 
-prefix = "toon " # The prefix of the bot.
+prefix="toon: "
 
 intents = discord.Intents.default()
 intents.members = True
+
 playing = [
     "Corporate Crash", "tewtow onlin",
     "old toontown download free working 100%", "litigator head model",
-    "toontown rewritten field offices leak", "Among Us (in real life)", "cuh...", "watch yo tone", ""
+    "toontown rewritten field offices leak", "Among Us (in real life)", "cuh...", "watch yo tone"
 ]
-
 client = commands.Bot(description="Toonbot",
                       command_prefix=prefix,
                       intents=intents,
@@ -40,6 +40,8 @@ client.remove_command('help')
 #Owner ID
 ownerID = 543576276108181506
 owner2ID = 353615061169995779
+
+
 
 
 @client.event
@@ -61,6 +63,7 @@ async def on_ready():
     print("\nBuilt With:")
     print("Python " + platform.python_version())
     print("Discord.py " + discord.__version__)
+
 #Help Command
 @client.command()
 async def help(ctx):
@@ -90,14 +93,14 @@ async def help(ctx):
         .format(prefix, prefix, prefix),
         inline=False)
 
-    await ctx.send(author, embed=embed)
+    await ctx.reply(author, embed=embed)
 
 
 #Ping Command
 @client.command()
 async def ping(ctx):
     """Ping Pong"""
-    await ctx.send('Pong!')
+    await ctx.reply('Pong!')
 
 
 #Roll Dice Command
@@ -105,7 +108,7 @@ async def ping(ctx):
 async def dice(ctx):
     """Rolls the dice"""
     cont = random.randint(1, 6)
-    await ctx.send("You Rolled **{}**".format(cont))
+    await ctx.reply("You Rolled **{}**".format(cont))
 
 
 #Coin Flip Command
@@ -114,21 +117,21 @@ async def toss(ctx):
     """Put the toss"""
     ch = ["Heads", "Tails"]
     rch = random.choice(ch)
-    await ctx.send(f"You got **{rch}**")
+    await ctx.reply(f"You got **{rch}**")
 
 
 #Reverse Text Command
 @client.command()
 async def reverse(ctx, *, text):
     """Reverse the given text"""
-    await ctx.send("".join(list(reversed(str(text)))))
+    await ctx.reply("".join(list(reversed(str(text)))))
 
 #sussy command
 @client.command()
 async def sus(ctx):
     """sees how sus you are"""
     susrates = "you are very sus :sussy: ", "you are kinda sus... maybe we have an imposter among us ", "you arent sus (you won)"
-    await ctx.send(random.choice(susrates))
+    await ctx.reply(random.choice(susrates))
 
 #Meme Command
 @client.command()
@@ -145,7 +148,7 @@ async def meme(ctx):
     url = "https://reddit.com" + url_base
     embed = discord.Embed(title=title, url=url, color=discord.Color.blurple())
     embed.set_image(url=img)
-    await ctx.send(embed=embed)
+    await ctx.reply(embed=embed)
 
 
 #r/Toontown Command Command
@@ -163,7 +166,7 @@ async def rtoontown(ctx):
     url = "https://reddit.com" + url_base
     embed = discord.Embed(title=title, url=url, color=discord.Color.blurple())
     embed.set_image(url=img)
-    await ctx.send(embed=embed)
+    await ctx.reply(embed=embed)
 
 
 #r/ToontownRewritten Command Command
@@ -182,7 +185,7 @@ async def rtoontownrewritten(ctx):
     url = "https://reddit.com" + url_base
     embed = discord.Embed(title=title, url=url, color=discord.Color.blurple())
     embed.set_image(url=img)
-    await ctx.send(embed=embed)
+    await ctx.reply(embed=embed)
 
 
 #Dadjoke Command
@@ -190,7 +193,7 @@ async def rtoontownrewritten(ctx):
 async def joke(ctx):
     """Sends the dadjokes"""
     async with ctx.typing():
-        await ctx.send(Dadjoke().joke)
+        await ctx.reply(Dadjoke().joke)
 
 
 @client.command("server")
@@ -217,7 +220,7 @@ async def s_info(ctx):
     embed.add_field(name="Server Icon Url", value=server.icon_url, inline=True)
     embed.set_footer(text=f"Yours truly, {client.user.name}")
     embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
-    await ctx.send(content=None, embed=embed)
+    await ctx.reply(content=None, embed=embed)
 
 
 #Stats Command
@@ -249,7 +252,7 @@ async def stats(ctx):
     embed.set_footer(text=f"Yours truly, {client.user.name}")
     embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
 
-    await ctx.send(embed=embed)
+    await ctx.reply(embed=embed)
 
 
 #Poll Command
@@ -263,7 +266,7 @@ async def poll(ctx, *args):
     embed.set_footer(text='Poll created by: {0} • React to vote!'.format(
         ctx.message.author))
 
-    embed_message = await ctx.send(embed=embed)
+    embed_message = await ctx.reply(embed=embed)
 
     await embed_message.add_reaction('👍')
     await embed_message.add_reaction('👎')
@@ -282,13 +285,14 @@ async def ttrdistricts(ctx):
     ttr_districts = ttr_districts.replace(',', '')
     ttr_districts = str(ttr_districts)[1:-2]
 
-    await ctx.send(ttr_districts)
+    await ctx.reply(ttr_districts)
 
 
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
-        await ctx.send("That Command Was not found!")
+        await ctx.reply("That Command Was not found!")
+
 
 
 #Run Bot
