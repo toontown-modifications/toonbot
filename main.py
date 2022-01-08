@@ -21,14 +21,14 @@ from keep_alive import keep_alive
 
 from discord.ext.commands import CommandNotFound
 
-prefix = "toon "
+prefix = "toon " # The prefix of the bot.
 
 intents = discord.Intents.default()
 intents.members = True
 playing = [
     "Corporate Crash", "tewtow onlin",
     "old toontown download free working 100%", "litigator head model",
-    "toontown rewritten field offices leak"
+    "toontown rewritten field offices leak", "Among Us (in real life)", "cuh...", "watch yo tone", ""
 ]
 
 client = commands.Bot(description="Toonbot",
@@ -61,11 +61,6 @@ async def on_ready():
     print("\nBuilt With:")
     print("Python " + platform.python_version())
     print("Discord.py " + discord.__version__)
-
-
-prefix = "toon "
-
-
 #Help Command
 @client.command()
 async def help(ctx):
@@ -85,8 +80,8 @@ async def help(ctx):
     embed.add_field(
         name="Fun",
         value=
-        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - Reverses the given text\n\n {}poll <name> - starts a poll"
-        .format(prefix, prefix, prefix, prefix, prefix),
+        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - <text> Reverses the given text\n\n {}poll <name> - starts a poll\n\n {}sus - sussy"
+        .format(prefix, prefix, prefix, prefix, prefix, prefix),
         inline=False)
     embed.add_field(
         name="Reddit Commands",
@@ -128,6 +123,13 @@ async def reverse(ctx, *, text):
     """Reverse the given text"""
     await ctx.send("".join(list(reversed(str(text)))))
 
+#sussy command
+@client.command()
+async def sus(ctx):
+    """sees how sus you are"""
+    susrates = "you are very sus :sussy: ", "you are kinda sus... maybe we have an imposter among us ", "you arent sus (you won)"
+    await ctx.send(random.choice(susrates))
+    print("done command")
 
 #Meme Command
 @client.command()
