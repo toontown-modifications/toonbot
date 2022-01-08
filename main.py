@@ -129,7 +129,6 @@ async def sus(ctx):
     """sees how sus you are"""
     susrates = "you are very sus :sussy: ", "you are kinda sus... maybe we have an imposter among us ", "you arent sus (you won)"
     await ctx.send(random.choice(susrates))
-    print("done command")
 
 #Meme Command
 @client.command()
