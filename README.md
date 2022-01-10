@@ -7,3 +7,8 @@ Clone The repo, then do
 Then, Made a file called ``.env`` Inside of it
 ``TOKEN=insertyourdiscordtokenhere``
 If you are on linux, you will have to open terminal and paste. ``export TOKEN=mytokenhere`` 
+
+# TODO
+Add Slash Commands
+More Commands
+More embeds to commands like ttr districts.
