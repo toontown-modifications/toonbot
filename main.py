@@ -17,7 +17,7 @@ import time
 from dadjokes import Dadjoke
 from discord.ext import commands
 from datetime import datetime
-from keep_alive import keep_alive
+
 
 from discord.ext.commands import CommandNotFound
 
@@ -299,6 +299,5 @@ async def on_command_error(ctx, error):
 
 
 #Run Bot
-keep_alive()
 TOKEN = os.environ.get("TOKEN")
 client.run(TOKEN)
