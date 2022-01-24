@@ -67,9 +67,7 @@ async def on_ready():
 #Help Command
 @client.command()
 async def help(ctx):
-    author = ctx.message.author
     embed = discord.Embed(color=discord.Color.orange())
-    embed.set_author(name="Commands:")
 
     #General Comamnds
     embed.add_field(
@@ -83,17 +81,17 @@ async def help(ctx):
     embed.add_field(
         name="Fun",
         value=
-        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - <text> Reverses the given text\n\n {}poll <name> - starts a poll\n\n {}sus - sussy"
+        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - <text> Reverses the given text\n\n {}poll <name> - starts a poll\n\n {}sus - sees how sus you are"
         .format(prefix, prefix, prefix, prefix, prefix, prefix),
         inline=False)
     embed.add_field(
-        name="Reddit Commands",
+        name="Reddit/API Commands",
         value=
-        "{}meme - Gives a random meme from r/memes.\n\n {}r/toontown - shows a random post from the Toontown subreddit.\n\n {}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit."
-        .format(prefix, prefix, prefix),
+        "{}meme - Gives a random meme from r/memes.\n\n {}r/toontown - shows a random post from the Toontown subreddit.\n\n {}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.\n\n {}ttrdistricts - Gives you a list of ttr distrcts"
+        .format(prefix, prefix, prefix, prefix),
         inline=False)
 
-    await ctx.reply(author, embed=embed)
+    await ctx.reply("A list of commands.", embed=embed)
 
 
 #Ping Command
@@ -276,6 +274,8 @@ async def poll(ctx, *args):
 #TTRDistricts commands
 @client.command(pass_context=True)
 async def ttrdistricts(ctx):
+    embed = discord.Embed(color=discord.Color.orange())
+    
     ttr_districts_api = "https://www.toontownrewritten.com/api/population"
     ttr_districts_response = requests.get(ttr_districts_api, verify=True)
     ttr_districts_json = ttr_districts_response.json()
@@ -284,8 +284,11 @@ async def ttrdistricts(ctx):
     ttr_districts = ttr_districts.replace('"', '')
     ttr_districts = ttr_districts.replace(',', '')
     ttr_districts = str(ttr_districts)[1:-2]
+    embed.add_field(name="Toontown Rewritten Districts",
+    value=ttr_districts
 
-    await ctx.reply(ttr_districts)
+    )
+    await ctx.reply(embed=embed)
 
 
 @client.event
