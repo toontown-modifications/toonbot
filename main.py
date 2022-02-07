@@ -13,7 +13,6 @@ import os
 import platform
 import requests
 import time
-
 from dadjokes import Dadjoke
 from discord.ext import commands
 from datetime import datetime
@@ -202,7 +201,7 @@ async def s_info(ctx):
                           description='\uFEFF',
                           colour=0x98FB98,
                           timestamp=ctx.message.created_at)
-    embed.set_thumbnail(url=server.icon_url_as(size=256))
+    embed.set_thumbnail(url=server.icon_url(size=256))
     embed.add_field(name="Name", value=server.name, inline=True)
     embed.add_field(name="Region", value=server.region, inline=True)
     embed.add_field(name="Member Count",
@@ -216,8 +215,6 @@ async def s_info(ctx):
                     value=f"{server.created_at}",
                     inline=True)
     embed.add_field(name="Server Icon Url", value=server.icon_url, inline=True)
-    embed.set_footer(text=f"Yours truly, {client.user.name}")
-    embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
     await ctx.reply(content=None, embed=embed)
 
 
@@ -234,7 +231,6 @@ async def stats(ctx):
                           description='\uFEFF',
                           colour=0x98FB98,
                           timestamp=ctx.message.created_at)
-
     embed.add_field(name='Python Version:',
                     value=f"{pythonVersion}",
                     inline=False)
@@ -248,10 +244,8 @@ async def stats(ctx):
                     "<@" + f"{owner2ID}" + ">",
                     inline=False)
     embed.set_footer(text=f"Yours truly, {client.user.name}")
-    embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
-
     await ctx.reply(embed=embed)
-
+    print("complete")
 
 #Poll Command
 @client.command(pass_context=True)
