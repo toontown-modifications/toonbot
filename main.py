@@ -1,8 +1,8 @@
-#***************************************************************************#
+# ***************************************************************************#
 #                                                                           #
 # Toonbot - A Toontown Themed Discord Bot.                                  #
 #                                                                           #
-#***************************************************************************#
+# ***************************************************************************#
 import aiohttp
 import box
 import datetime
@@ -17,10 +17,9 @@ from dadjokes import Dadjoke
 from discord.ext import commands
 from datetime import datetime
 
-
 from discord.ext.commands import CommandNotFound
 
-prefix="toon: "
+prefix = "toon: "
 
 intents = discord.Intents.default()
 intents.members = True
@@ -36,11 +35,9 @@ client = commands.Bot(description="Toonbot",
                       activity=discord.Game(name=random.choice(playing)))
 client.remove_command('help')
 
-#Owner ID
+# Owner ID
 ownerID = 543576276108181506
 owner2ID = 353615061169995779
-
-
 
 
 @client.event
@@ -63,44 +60,49 @@ async def on_ready():
     print("Python " + platform.python_version())
     print("Discord.py " + discord.__version__)
 
-#Help Command
+
+# Help Command
 @client.command()
 async def help(ctx):
     embed = discord.Embed(color=discord.Color.orange())
 
-    #General Comamnds
+    # General Comamnds
     embed.add_field(
         name="General",
         value=
-        "{}help - Shows This Message\n\n {}ping - Says Pong Back To You\n\n {}server - Shows Server Info\n\n {}stats - Show Bot Stats"
-        .format(prefix, prefix, prefix, prefix),
+        "{}help - Shows This Message\n\n {}ping - Says Pong Back To You\n\n {}server - Shows Server Info\n\n {}stats "
+        "- Show Bot Stats "
+            .format(prefix, prefix, prefix, prefix),
         inline=False)
 
-    #Fun Comamnds
+    # Fun Comamnds
     embed.add_field(
         name="Fun",
         value=
-        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - <text> Reverses the given text\n\n {}poll <name> - starts a poll\n\n {}sus - sees how sus you are"
-        .format(prefix, prefix, prefix, prefix, prefix, prefix),
+        "{}toss - Coin Flip\n\n {}joke - Give a Dad Joke\n\n {}dice - Roll 1-6\n\n {}reverse - <text> Reverses the "
+        "given text\n\n {}poll <name> - starts a poll\n\n {}sus - sees how sus you are "
+            .format(prefix, prefix, prefix, prefix, prefix, prefix),
         inline=False)
     embed.add_field(
         name="Reddit/API Commands",
         value=
-        "{}meme - Gives a random meme from r/memes.\n\n {}r/toontown - shows a random post from the Toontown subreddit.\n\n {}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.\n\n {}ttrdistricts - Gives you a list of ttr distrcts"
-        .format(prefix, prefix, prefix, prefix),
+        "{}meme - Gives a random meme from r/memes.\n\n {}r/toontown - shows a random post from the Toontown "
+        "subreddit.\n\n {}r/toontownrewritten - shows a random post from the Toontown Rewritten subreddit.\n\n {"
+        "}ttrdistricts - Gives you a list of ttr distrcts "
+            .format(prefix, prefix, prefix, prefix),
         inline=False)
 
     await ctx.reply("A list of commands.", embed=embed)
 
 
-#Ping Command
+# Ping Command
 @client.command()
 async def ping(ctx):
     """Ping Pong"""
     await ctx.reply('Pong!')
 
 
-#Roll Dice Command
+# Roll Dice Command
 @client.command(aliases=["roll"])
 async def dice(ctx):
     """Rolls the dice"""
@@ -108,7 +110,7 @@ async def dice(ctx):
     await ctx.reply("You Rolled **{}**".format(cont))
 
 
-#Coin Flip Command
+# Coin Flip Command
 @client.command(aliases=["flip"])
 async def toss(ctx):
     """Put the toss"""
@@ -117,20 +119,22 @@ async def toss(ctx):
     await ctx.reply(f"You got **{rch}**")
 
 
-#Reverse Text Command
+# Reverse Text Command
 @client.command()
 async def reverse(ctx, *, text):
     """Reverse the given text"""
     await ctx.reply("".join(list(reversed(str(text)))))
 
-#sussy command
+
+# sussy command
 @client.command()
 async def sus(ctx):
     """sees how sus you are"""
     susrates = "you are very sus :sussy: ", "you are kinda sus... maybe we have an imposter among us ", "you arent sus (you won)"
     await ctx.reply(random.choice(susrates))
 
-#Meme Command
+
+# Meme Command
 @client.command()
 async def meme(ctx):
     """Sends you random meme"""
@@ -148,7 +152,7 @@ async def meme(ctx):
     await ctx.reply(embed=embed)
 
 
-#r/Toontown Command Command
+# r/Toontown Command Command
 @client.command(aliases=['r/toontown'])
 async def rtoontown(ctx):
     """Sends you a random post from r/toontown"""
@@ -166,7 +170,7 @@ async def rtoontown(ctx):
     await ctx.reply(embed=embed)
 
 
-#r/ToontownRewritten Command Command
+# r/ToontownRewritten Command
 @client.command(aliases=['r/toontownrewritten'])
 async def rtoontownrewritten(ctx):
     """Sends you a random post from r/toontownrewritten"""
@@ -185,7 +189,7 @@ async def rtoontownrewritten(ctx):
     await ctx.reply(embed=embed)
 
 
-#Dadjoke Command
+# Dad-joke Command
 @client.command(aliases=["dadjoke"])
 async def joke(ctx):
     """Sends the dadjokes"""
@@ -218,10 +222,9 @@ async def s_info(ctx):
     await ctx.reply(content=None, embed=embed)
 
 
-#Stats Command
+# Stats Command
 @client.command()
 async def stats(ctx):
-
     pythonVersion = platform.python_version()
     dpyVersion = discord.__version__
     serverCount = len(client.guilds)
@@ -241,18 +244,19 @@ async def stats(ctx):
     embed.add_field(name='Total Users:', value=f"{memberCount}", inline=False)
     embed.add_field(name='Bot Developers:',
                     value="<@" + f"{ownerID}" + ">, "
-                    "<@" + f"{owner2ID}" + ">",
+                                                "<@" + f"{owner2ID}" + ">",
                     inline=False)
     embed.set_footer(text=f"Yours truly, {client.user.name}")
     await ctx.reply(embed=embed)
     print("complete")
 
-#Poll Command
+
+# Poll Command
 @client.command(pass_context=True)
 async def poll(ctx, *args):
-    mesg = ' '.join(args)
+    msg = ' '.join(args)
     embed = discord.Embed(title='A Poll has Started !',
-                          description='{0}'.format(mesg),
+                          description='{0}'.format(msg),
                           color=0x00FF00)
 
     embed.set_footer(text='Poll created by: {0} • React to vote!'.format(
@@ -265,11 +269,11 @@ async def poll(ctx, *args):
     await embed_message.add_reaction('🤷')
 
 
-#TTRDistricts commands
+# TTRDistricts commands
 @client.command(pass_context=True)
 async def ttrdistricts(ctx):
     embed = discord.Embed(color=discord.Color.orange())
-    
+
     ttr_districts_api = "https://www.toontownrewritten.com/api/population"
     ttr_districts_response = requests.get(ttr_districts_api, verify=True)
     ttr_districts_json = ttr_districts_response.json()
@@ -279,9 +283,9 @@ async def ttrdistricts(ctx):
     ttr_districts = ttr_districts.replace(',', '')
     ttr_districts = str(ttr_districts)[1:-2]
     embed.add_field(name="Toontown Rewritten Districts",
-    value=ttr_districts
+                    value=ttr_districts
 
-    )
+                    )
     await ctx.reply(embed=embed)
 
 
@@ -291,7 +295,6 @@ async def on_command_error(ctx, error):
         await ctx.reply("That Command Was not found!")
 
 
-
-#Run Bot
+# Run Bot
 TOKEN = os.environ.get("TOKEN")
 client.run(TOKEN)
